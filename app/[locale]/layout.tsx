@@ -31,8 +31,8 @@ export async function generateMetadata({
       ? "Mihai Albert — Dezvoltator Frontend Senior"
       : "Mihai Albert — Senior Frontend Developer",
     description: isRo
-      ? "Portofoliu al lui Albert Mihai Ioan, Dezvoltator Frontend Senior cu 7+ ani experiență în React, TypeScript și Next.js."
-      : "Portfolio of Albert Mihai Ioan, Senior Frontend Developer with 7+ years specializing in React, TypeScript, and Next.js.",
+      ? "Portofoliu al lui Albert Mihai Ioan, Dezvoltator Frontend Senior cu 8+ ani experiență în React, TypeScript și Next.js."
+      : "Portfolio of Albert Mihai Ioan, Senior Frontend Developer with 8+ years specializing in React, TypeScript, and Next.js.",
     metadataBase: new URL("https://mihai-albert.dev"),
     alternates: {
       canonical: `https://mihai-albert.dev/${locale}`,

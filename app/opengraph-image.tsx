@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { personalInfo } from "@/lib/data";
 
 export const runtime = "edge";
-export const alt = `${personalInfo.name} — ${personalInfo.title}`;
+export const alt = `${personalInfo.name} — Senior Frontend Developer`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -105,7 +105,7 @@ export default function OgImage() {
               marginBottom: "32px",
             }}
           >
-            {personalInfo.title}
+            Senior Frontend Developer
           </div>
 
           {/* Divider */}
@@ -128,7 +128,7 @@ export default function OgImage() {
               justifyContent: "center",
             }}
           >
-            {["React", "Next.js", "TypeScript", "7+ Years Exp."].map((tag) => (
+            {["React", "Next.js", "TypeScript", "8+ Years Exp."].map((tag) => (
               <div
                 key={tag}
                 style={{

@@ -43,10 +43,12 @@ export function Experience({ t }: Props) {
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-px" style={{ background: "linear-gradient(to bottom, #3b82f6, #8b5cf6)" }} aria-hidden="true" />
             <div className="space-y-10">
               {experience.map((entry, index) => {
+                const content = t.items[entry.id as keyof typeof t.items];
+                if (!content) return null;
                 const isLeft = index % 2 === 0;
                 return (
                   <motion.div
-                    key={entry.company}
+                    key={entry.id}
                     variants={item}
                     className={`relative flex md:items-center gap-6 md:gap-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
                   >
@@ -54,12 +56,12 @@ export function Experience({ t }: Props) {
                     <div className={`ml-12 md:ml-0 md:w-[calc(50%-2rem)] ${isLeft ? "md:mr-8 md:text-right" : "md:ml-8 md:text-left"}`}>
                       <GlassCard className="text-left">
                         <div className="flex items-start justify-between gap-2 mb-1 flex-wrap">
-                          <h4 className="font-semibold text-white">{entry.role}</h4>
+                          <h4 className="font-semibold text-white">{content.role}</h4>
                           <span className="text-xs text-slate-500 font-mono whitespace-nowrap">{entry.period}</span>
                         </div>
                         <p className="text-violet-400 font-medium text-sm mb-4">{entry.company}</p>
                         <ul className="space-y-2" role="list">
-                          {entry.achievements.map((achievement) => (
+                          {content.achievements.map((achievement) => (
                             <li key={achievement} className="flex items-start gap-2 text-slate-400 text-sm">
                               <CheckCircle size={14} className="text-teal-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
                               {achievement}
@@ -82,18 +84,22 @@ export function Experience({ t }: Props) {
             {t.education}
           </motion.h3>
           <div className="grid sm:grid-cols-2 gap-6">
-            {education.map((entry) => (
-              <motion.div key={entry.degree} variants={item}>
-                <GlassCard>
-                  <div className="flex items-center gap-2 mb-2">
-                    <GraduationCap size={16} className="text-teal-400 flex-shrink-0" aria-hidden="true" />
-                    <span className="text-xs text-slate-500 font-mono">{entry.period}</span>
-                  </div>
-                  <h4 className="font-semibold text-white text-sm mb-1">{entry.degree}</h4>
-                  <p className="text-slate-400 text-sm">{entry.institution}</p>
-                </GlassCard>
-              </motion.div>
-            ))}
+            {education.map((entry) => {
+              const content = t.educationItems[entry.id as keyof typeof t.educationItems];
+              if (!content) return null;
+              return (
+                <motion.div key={entry.id} variants={item}>
+                  <GlassCard>
+                    <div className="flex items-center gap-2 mb-2">
+                      <GraduationCap size={16} className="text-teal-400 flex-shrink-0" aria-hidden="true" />
+                      <span className="text-xs text-slate-500 font-mono">{entry.period}</span>
+                    </div>
+                    <h4 className="font-semibold text-white text-sm mb-1">{content.degree}</h4>
+                    <p className="text-slate-400 text-sm">{entry.institution}</p>
+                  </GlassCard>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>

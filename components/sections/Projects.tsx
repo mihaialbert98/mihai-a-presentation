@@ -41,35 +41,39 @@ export function Projects({ t }: Props) {
         </motion.div>
 
         <motion.div initial="hidden" animate={inView ? "visible" : "hidden"} variants={container} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <motion.div key={project.title} variants={item}>
-              <GlassCard hover className="flex flex-col h-full p-0 overflow-hidden">
-                <div className="relative w-full aspect-video overflow-hidden rounded-t-2xl">
-                  <Image
-                    src={project.image}
-                    alt={`Screenshot of ${project.title}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover object-top"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-1/3" style={{ background: "linear-gradient(to top, rgba(2,8,23,0.8), transparent)" }} aria-hidden="true" />
-                </div>
-                <div className="flex flex-col flex-1 p-5">
-                  <h3 className="text-lg font-semibold text-white mb-2">{project.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {project.tags.map((tag, i) => (
-                      <Badge key={tag} variant={getBadgeVariant(i)}>{tag}</Badge>
-                    ))}
+          {projects.map((project) => {
+            const content = t.items[project.id as keyof typeof t.items];
+            if (!content) return null;
+            return (
+              <motion.div key={project.id} variants={item}>
+                <GlassCard hover className="flex flex-col h-full p-0 overflow-hidden">
+                  <div className="relative w-full aspect-video overflow-hidden rounded-t-2xl">
+                    <Image
+                      src={project.image}
+                      alt={`Screenshot of ${content.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-top"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 h-1/3" style={{ background: "linear-gradient(to top, rgba(2,8,23,0.8), transparent)" }} aria-hidden="true" />
                   </div>
-                  <Button href={project.url} target="_blank" rel="noopener noreferrer" variant="ghost" size="md" className="w-full justify-center">
-                    <ExternalLink size={16} />
-                    {t.viewLive}
-                  </Button>
-                </div>
-              </GlassCard>
-            </motion.div>
-          ))}
+                  <div className="flex flex-col flex-1 p-5">
+                    <h3 className="text-lg font-semibold text-white mb-2">{content.title}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">{content.description}</p>
+                    <div className="flex flex-wrap gap-1.5 mb-5">
+                      {project.tags.map((tag, i) => (
+                        <Badge key={tag} variant={getBadgeVariant(i)}>{tag}</Badge>
+                      ))}
+                    </div>
+                    <Button href={project.url} target="_blank" rel="noopener noreferrer" variant="ghost" size="md" className="w-full justify-center">
+                      <ExternalLink size={16} />
+                      {t.viewLive}
+                    </Button>
+                  </div>
+                </GlassCard>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

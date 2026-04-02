@@ -2,7 +2,7 @@
 
 import { useInView } from "react-intersection-observer";
 import { motion, useReducedMotion } from "framer-motion";
-import { personalInfo, skills, certifications } from "@/lib/data";
+import { skills, certifications } from "@/lib/data";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Badge } from "@/components/ui/Badge";
 import type { Translations } from "@/lib/i18n/translations";
@@ -42,7 +42,7 @@ export function About({ t }: Props) {
           <motion.div variants={item}>
             <GlassCard className="h-full">
               <h3 className="text-lg font-semibold text-blue-400 mb-4">{t.whoIAm}</h3>
-              <p className="text-slate-300 leading-relaxed mb-6">{personalInfo.bio}</p>
+              <p className="text-slate-300 leading-relaxed mb-6">{t.bio}</p>
               <p className="text-slate-400 leading-relaxed mb-8">{t.extra}</p>
               <div>
                 <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">{t.certifications}</h4>
